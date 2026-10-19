@@ -1,0 +1,17 @@
+# Maven build kimenet
+target/
+
+# IDE specifikus fájlok (IntelliJ, Eclipse, VS Code)
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# Operációs rendszer fájlok (macOS, Windows)
+.DS_Store
+Thumbs.db
+
+# Helyi adatfájlok (a kiírás alapján nem kerülhetnek a repóba)
+*.txt
