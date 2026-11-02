@@ -1,0 +1,118 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "carwash.model" {
+    class Customer {
+        - name: String
+        + Customer(name: String)
+        + getName(): String
+        + toString(): String
+    }
+
+    abstract class WashType {
+        + {abstract} getName(): String
+        + {abstract} getBasePrice(): double
+        + toString(): String
+    }
+
+    class BasicWash {
+        + getName(): String
+        + getBasePrice(): double
+    }
+
+    class PremiumWash {
+        + getName(): String
+        + getBasePrice(): double
+    }
+
+    interface DiscountStrategy {
+        + calculate(basePrice: double): double
+        + getName(): String
+    }
+
+    class NoDiscount {
+        + calculate(basePrice: double): double
+        + getName(): String
+    }
+
+    class FleetDiscount {
+        + calculate(basePrice: double): double
+        + getName(): String
+    }
+
+    class Booking {
+        - customer: Customer
+        - licensePlate: String
+        - washType: WashType
+        - price: double
+        - timeSlot: String
+        + Booking(customer: Customer, licensePlate: String, washType: WashType, price: double, timeSlot: String)
+        + getCustomer(): Customer
+        + getLicensePlate(): String
+        + getWashType(): WashType
+        + getPrice(): double
+        + getTimeSlot(): String
+        + compareTo(other: Booking): int
+        + toString(): String
+    }
+}
+
+package "carwash.exception" {
+    class DuplicateBookingException extends java.lang.Exception {
+        + DuplicateBookingException(message: String)
+    }
+
+    class ValidationException extends java.lang.Exception {
+        + ValidationException(message: String)
+    }
+}
+
+package "carwash.persistence" {
+    class BookingRepository {
+        - filePath: String
+        + BookingRepository(filePath: String)
+        + save(bookings: List<Booking>): void
+        + load(): List<Booking>
+    }
+}
+
+package "carwash.service" {
+    class BookingService {
+        - bookings: List<Booking>
+        - repository: BookingRepository
+        + BookingService(repository: BookingRepository)
+        + addBooking(name: String, plate: String, wash: WashType, discount: DiscountStrategy, time: String): Booking
+        + getBookings(): List<Booking>
+        + getBookingsSortedByTime(): List<Booking>
+        + getBookingsSortedByPrice(): List<Booking>
+        + saveToFile(): void
+        + loadFromFile(): void
+    }
+}
+
+package "carwash.ui" {
+    class Main {
+        - {static} service: BookingService
+        + {static} main(args: String[]): void
+    }
+}
+
+' Relationships & Realizations
+WashType <|-- BasicWash
+WashType <|-- PremiumWash
+
+DiscountStrategy <|.. NoDiscount
+DiscountStrategy <|.. FleetDiscount
+
+Booking ..|> java.lang.Comparable
+
+Booking *-- "1" Customer : has
+Booking o-- "1" WashType : uses
+
+BookingService o-- "0..*" Booking : manages
+BookingService --> BookingRepository : persists through
+BookingService ..> DiscountStrategy : applies
+
+Main --> BookingService : delegates to
+
+@enduml

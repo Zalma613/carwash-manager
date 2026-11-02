@@ -1,17 +1,31 @@
 # Maven build kimenet
 target/
+*.jar
+*.war
+*.ear
 
-# IDE specifikus fájlok (IntelliJ, Eclipse, VS Code)
+# IDE és editor fájlok
 .idea/
 *.iml
 .classpath
 .project
 .settings/
 .vscode/
+*.sublime-project
+*.sublime-workspace
 
-# Operációs rendszer fájlok (macOS, Windows)
+# Operációs rendszer fájlok (macOS, Windows, Linux)
 .DS_Store
+**/.DS_Store
+._*
 Thumbs.db
+ehthumbs.db
 
-# Helyi adatfájlok (a kiírás alapján nem kerülhetnek a repóba)
-*.txt
+# Helyi futási adatfájlok (a kiírás alapján lokális adatfájlok nem kerülhetnek a repóba)
+bookings.txt
+*.log
+
+# Ideiglenes és backup fájlok
+*.tmp
+*.bak
+*~

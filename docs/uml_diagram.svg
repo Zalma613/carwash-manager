@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 620" width="950" height="620" style="background:#ffffff; font-family: sans-serif;">
+  <defs>
+    <style>
+      .box { fill: #f8fafc; stroke: #334155; stroke-width: 2; rx: 6; }
+      .header { fill: #e2e8f0; stroke: #334155; stroke-width: 2; }
+      .title { font-weight: bold; font-size: 14px; fill: #0f172a; text-anchor: middle; }
+      .meta { font-style: italic; font-size: 11px; fill: #475569; text-anchor: middle; }
+      .member { font-size: 12px; fill: #1e293b; font-family: monospace; }
+      .line { stroke: #475569; stroke-width: 1.5; fill: none; }
+      .dashed { stroke-dasharray: 5,5; }
+      .arrow { fill: #475569; }
+      .empty-arrow { fill: #ffffff; stroke: #475569; stroke-width: 1.5; }
+    </style>
+    <marker id="inherits" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+      <polygon points="0,0 10,5 0,10" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+    </marker>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+      <polygon points="0,0 8,4 0,8" fill="#475569"/>
+    </marker>
+    <marker id="diamond" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto">
+      <polygon points="0,4 6,0 12,4 6,8" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="475" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f172a">CarWash Manager - UML Osztálydiagram</text>
+
+  <!-- Customer -->
+  <g transform="translate(30, 70)">
+    <rect width="180" height="90" class="box"/>
+    <path d="M 0,0 L 180,0 L 180,30 L 0,30 Z" class="header"/>
+    <text x="90" y="20" class="title">Customer</text>
+    <text x="10" y="50" class="member">- name: String</text>
+    <line x1="0" y1="60" x2="180" y2="60" stroke="#cbd5e1"/>
+    <text x="10" y="78" class="member">+ getName(): String</text>
+  </g>
+
+  <!-- WashType (Abstract) -->
+  <g transform="translate(350, 70)">
+    <rect width="220" height="110" class="box"/>
+    <path d="M 0,0 L 220,0 L 220,38 L 0,38 Z" class="header"/>
+    <text x="110" y="16" class="meta">&lt;&lt;abstract&gt;&gt;</text>
+    <text x="110" y="32" class="title">WashType</text>
+    <text x="10" y="60" class="member">+ getName()*: String</text>
+    <text x="10" y="80" class="member">+ getBasePrice()*: double</text>
+    <text x="10" y="100" class="member">+ toString(): String</text>
+  </g>
+
+  <!-- BasicWash -->
+  <g transform="translate(260, 230)">
+    <rect width="170" height="75" class="box"/>
+    <path d="M 0,0 L 170,0 L 170,28 L 0,28 Z" class="header"/>
+    <text x="85" y="20" class="title">BasicWash</text>
+    <text x="10" y="48" class="member">+ getName(): String</text>
+    <text x="10" y="65" class="member">+ getBasePrice(): double</text>
+  </g>
+
+  <!-- PremiumWash -->
+  <g transform="translate(470, 230)">
+    <rect width="170" height="75" class="box"/>
+    <path d="M 0,0 L 170,0 L 170,28 L 0,28 Z" class="header"/>
+    <text x="85" y="20" class="title">PremiumWash</text>
+    <text x="10" y="48" class="member">+ getName(): String</text>
+    <text x="10" y="65" class="member">+ getBasePrice(): double</text>
+  </g>
+
+  <!-- Inheritance lines for WashType -->
+  <path d="M 345,230 L 345,200 L 460,200 L 460,180" class="line" marker-end="url(#inherits)"/>
+  <path d="M 555,230 L 555,200 L 460,200" class="line"/>
+
+  <!-- DiscountStrategy (Interface) -->
+  <g transform="translate(680, 70)">
+    <rect width="230" height="95" class="box"/>
+    <path d="M 0,0 L 230,0 L 230,38 L 0,38 Z" class="header"/>
+    <text x="115" y="16" class="meta">&lt;&lt;interface&gt;&gt;</text>
+    <text x="115" y="32" class="title">DiscountStrategy</text>
+    <text x="10" y="60" class="member">+ calculate(price): double</text>
+    <text x="10" y="80" class="member">+ getName(): String</text>
+  </g>
+
+  <!-- NoDiscount -->
+  <g transform="translate(640, 230)">
+    <rect width="140" height="70" class="box"/>
+    <path d="M 0,0 L 140,0 L 140,28 L 0,28 Z" class="header"/>
+    <text x="70" y="20" class="title">NoDiscount</text>
+    <text x="10" y="50" class="member">+ calculate(p): double</text>
+  </g>
+
+  <!-- FleetDiscount -->
+  <g transform="translate(800, 230)">
+    <rect width="140" height="70" class="box"/>
+    <path d="M 0,0 L 140,0 L 140,28 L 0,28 Z" class="header"/>
+    <text x="70" y="20" class="title">FleetDiscount</text>
+    <text x="10" y="50" class="member">+ calculate(p): double</text>
+  </g>
+
+  <!-- Realization lines for DiscountStrategy -->
+  <path d="M 710,230 L 710,190 L 795,190 L 795,165" class="line dashed" marker-end="url(#inherits)"/>
+  <path d="M 870,230 L 870,190 L 795,190" class="line dashed"/>
+
+  <!-- Booking -->
+  <g transform="translate(30, 360)">
+    <rect width="250" height="170" class="box"/>
+    <path d="M 0,0 L 250,0 L 250,30 L 0,30 Z" class="header"/>
+    <text x="125" y="20" class="title">Booking</text>
+    <text x="10" y="50" class="member">- customer: Customer</text>
+    <text x="10" y="68" class="member">- licensePlate: String</text>
+    <text x="10" y="86" class="member">- washType: WashType</text>
+    <text x="10" y="104" class="member">- price: double</text>
+    <text x="10" y="122" class="member">- timeSlot: String</text>
+    <line x1="0" y1="130" x2="250" y2="130" stroke="#cbd5e1"/>
+    <text x="10" y="148" class="member">+ compareTo(other): int</text>
+    <text x="10" y="166" class="member">+ toString(): String</text>
+  </g>
+
+  <!-- Booking associations -->
+  <path d="M 120,360 L 120,160" class="line" marker-start="url(#diamond)"/>
+  <text x="130" y="180" font-size="11" fill="#475569">1</text>
+  <text x="130" y="345" font-size="11" fill="#475569">1</text>
+
+  <path d="M 280,410 L 370,410 L 370,180" class="line" marker-start="url(#diamond)"/>
+  <text x="380" y="200" font-size="11" fill="#475569">1</text>
+
+  <!-- BookingRepository -->
+  <g transform="translate(680, 400)">
+    <rect width="230" height="90" class="box"/>
+    <path d="M 0,0 L 230,0 L 230,30 L 0,30 Z" class="header"/>
+    <text x="115" y="20" class="title">BookingRepository</text>
+    <text x="10" y="50" class="member">- filePath: String</text>
+    <line x1="0" y1="60" x2="230" y2="60" stroke="#cbd5e1"/>
+    <text x="10" y="78" class="member">+ save(bookings) / load()</text>
+  </g>
+
+  <!-- BookingService -->
+  <g transform="translate(360, 360)">
+    <rect width="250" height="170" class="box"/>
+    <path d="M 0,0 L 250,0 L 250,30 L 0,30 Z" class="header"/>
+    <text x="125" y="20" class="title">BookingService</text>
+    <text x="10" y="50" class="member">- bookings: List&lt;Booking&gt;</text>
+    <text x="10" y="68" class="member">- repository: BookingRepo</text>
+    <line x1="0" y1="75" x2="250" y2="75" stroke="#cbd5e1"/>
+    <text x="10" y="95" class="member">+ addBooking(...): Booking</text>
+    <text x="10" y="115" class="member">+ getBookings(): List</text>
+    <text x="10" y="135" class="member">+ getBookingsSortedByTime()</text>
+    <text x="10" y="155" class="member">+ saveToFile() / loadFromFile()</text>
+  </g>
+
+  <!-- BookingService -> Booking -->
+  <path d="M 360,450 L 280,450" class="line" marker-start="url(#diamond)"/>
+  <text x="340" y="440" font-size="11" fill="#475569">1</text>
+  <text x="290" y="440" font-size="11" fill="#475569">0..*</text>
+
+  <!-- BookingService -> Repository -->
+  <path d="M 610,450 L 680,450" class="line" marker-end="url(#arrow)"/>
+
+  <!-- Footer Info -->
+  <text x="475" y="590" text-anchor="middle" font-size="12" fill="#64748b">Csomagok: carwash.model | carwash.service | carwash.persistence | carwash.exception | carwash.ui</text>
+</svg>
